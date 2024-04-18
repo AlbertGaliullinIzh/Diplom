@@ -18,11 +18,12 @@ zeek --version
 zeek --help
 
 #config files
-file="/opt/zeek/etc/node.cfg"
+file="/opt/zeek/etc/networks.cfg"
 text1="$IP/12       Private IP space"
-texxt2="192.168.0.0/16      Private IP space"
+text2="192.168.0.0/16      Private IP space"
 
-:> "$file"
-echo "$text1" >> "file"
-echo "$text2" >> "file"
+cat /dev/null > "$file"
+
+echo "$text1" >> "$file"
+echo "$text2" >> "$file"
 
