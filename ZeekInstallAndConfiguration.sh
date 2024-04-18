@@ -1,5 +1,7 @@
 #!/bin/bash
 
+IP=""
+
 apt install curl
 
 curl -fsSL https://download.opensuse.org/repositories/security:zeek/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/security_zeek.gpg > /dev/null
@@ -14,3 +16,13 @@ echo $PATH
 which zeek
 zeek --version
 zeek --help
+
+#config files
+file="/opt/zeek/etc/node.cfg"
+text1="$IP/12       Private IP space"
+texxt2="192.168.0.0/16      Private IP space"
+
+:> "$file"
+echo "$text1" >> "file"
+echo "$text2" >> "file"
+
