@@ -58,6 +58,7 @@ echo "type=worker" >> "$file"
 echo "host=localhost" >> "$file"
 echo "interface=lo" >> "$file"
 
-./opt/zeek/bin/zeekctl check
-./opt/zeek/bin/zeekctl deploy
+cd /opt/zeek/bin
+./zeekctl check
+./zeekctl deploy
 
