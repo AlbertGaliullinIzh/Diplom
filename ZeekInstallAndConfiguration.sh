@@ -1,8 +1,16 @@
 #!/bin/bash
 
-apt update && apt install curl gnupg2 -y
-echo 'deb http://download.opensuse.org/repositories/security:/zeek/Debian_12/ /' > /etc/apt/sources.list.d/zeek.list
-curl -fsSL https://download.opensuse.org/repositories/security:zeek/Debian_12/Release.key | gpg --dearmor > /etc/apt/trusted.gpg.d/security_zeek.gpg
+apt install curl
 
-apt install zeek
-apt install zeekctl
+curl -fsSL https://download.opensuse.org/repositories/security:zeek/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/security_zeek.gpg > /dev/null
+echo 'deb http://download.opensuse.org/repositories/security:/zeek/Debian_12/ /' | sudo tee /etc/apt/sources.list.d/security:zeek.list
+
+apt update
+apt install zeek-lts -y
+
+echo "export PATH=$PATH:/opt/zeek/bin" >> ~/.bashrc
+source ~/.bashrc
+echo $PATH
+which zeek
+zeek --version
+zeek --help
