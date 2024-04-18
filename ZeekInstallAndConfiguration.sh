@@ -57,3 +57,7 @@ echo "[zeek-worker-lo]" >> "$file"
 echo "type=worker" >> "$file"
 echo "host=localhost" >> "$file"
 echo "interface=lo" >> "$file"
+
+./opt/zeek/bin/zeekctl check
+./opt/zeek/bin/zeekctl deploy
+
