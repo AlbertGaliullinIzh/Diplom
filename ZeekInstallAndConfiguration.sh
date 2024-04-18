@@ -1,6 +1,7 @@
 #!/bin/bash
 
 IP=""
+interface=""
 
 apt install curl
 
@@ -27,3 +28,32 @@ cat /dev/null > "$file"
 echo "$text1" >> "$file"
 echo "$text2" >> "$file"
 
+file="/opt/zeek/etc/node.cfg"
+
+cat /dev/null > "$file"
+
+
+echo "[zeek-logger]" >> "$file"
+echo "type=logger" >> "$file"
+echo "host=$IP" >> "$file"
+
+echo "" >> "$file"
+echo "[zeek-manager]" >> "$file"
+echo "type=manager" >> "$file"
+echo "host=$IP" >> "$file"
+echo "" >> "$file"
+echo "[zeek-proxy]" >> "$file"
+echo "type=proxy" >> "$file"
+echo "host=$IP" >> "$file"
+
+echo "" >> "$file"
+echo "[zeek-worker]" >> "$file"
+echo "type=worker" >> "$file"
+echo "host=$IP" >> "$file"
+echo "interface=$interface" >> "$file"
+
+echo "" >> "$file"
+echo "[zeek-worker-lo]" >> "$file"
+echo "type=worker" >> "$file"
+echo "host=localhost" >> "$file"
+echo "interface=lo" >> "$file"
