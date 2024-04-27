@@ -62,3 +62,9 @@ cd /opt/zeek/bin
 ./zeekctl check
 ./zeekctl deploy
 
+cd /opt/zeek/logs
+file_url="https://github.com/AlbertGaliullinIzh/Diplom/blob/master/DetectionScanningPorts.py"
+file="DetectionScanningPorts.py"
+
+wget -O "$file" "$file_url"
+
