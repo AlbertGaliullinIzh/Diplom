@@ -58,6 +58,8 @@ echo "type=worker" >> "$file"
 echo "host=localhost" >> "$file"
 echo "interface=lo" >> "$file"
 
+echo " @load policy/tuning/json-logs.zeek" >> /opt/zeek/share/zeek/site/local.zeek
+
 cd /opt/zeek/bin
 ./zeekctl check
 ./zeekctl deploy
