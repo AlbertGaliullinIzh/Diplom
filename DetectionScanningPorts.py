@@ -1,10 +1,11 @@
-import json
 import time
 
 machineIp = ""
 json_list= list()
-print("Обнаружение сканирования портов...")
-with open('conn.log', 'r') as file:
+
+print("Detection scaning ports start...")
+
+with open('current/conn.log', 'r') as file:
     current_position = file.tell()
     while True:
         file.seek(current_position)
