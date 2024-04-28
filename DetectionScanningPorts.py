@@ -27,8 +27,8 @@ with open('current/conn.log', 'r') as file:
             if len(recordsForIp) > 10:
                 print(f"Обнаружена подозрительная активность. Предположение: сканирование портов. Адрес: {recordsForIp[0]['id.orig_h']}")
         
-        if len(json_list) <= 100:
+        if len(json_list) <= 9:
             pass
         else:
-            json_list = json_list[-100:]
+            json_list = json_list[-9:]
         time.sleep(5)
