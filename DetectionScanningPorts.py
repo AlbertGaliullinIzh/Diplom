@@ -1,6 +1,6 @@
 import time
 
-machineIp = ""
+machineIp = [""]
 json_list= list()
 
 print("Detection scaning ports start...")
@@ -19,7 +19,7 @@ with open('current/conn.log', 'r') as file:
             json_list[i] = eval(json_list[i].replace("true","True").replace("false","False"))
             i+=1
 
-        json_list_for_analiz = [elem for elem in json_list if elem.get("id.orig_h") != elem.get("id.resp_h") and elem.get("id.orig_h") != machineIp]
+        json_list_for_analiz = [elem for elem in json_list if elem.get("id.orig_h") != elem.get("id.resp_h") and elem.get("id.orig_h") not in machineIp]
         unicationIP = set([elem["id.orig_h"] for elem in json_list])
 
         for ip in unicationIP:
