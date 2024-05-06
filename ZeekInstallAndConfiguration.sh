@@ -81,4 +81,4 @@ cd /opt/zeek/bin
 mkdir /bin/monitoringProccess
 cd -
 cp "DetectionScanningPorts.py" "/bin/monitoringProccess"
-sed -i "s/machineIP=""/machineIP=$IP_server/g" /opt/zeek/logs/DetectionScanningPorts.py
+sed -i "s/machineIP=""/machineIP=$IP_server/g" /bin/monitoringProccess/DetectionScanningPorts.py
