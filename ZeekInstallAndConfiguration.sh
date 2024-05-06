@@ -17,7 +17,7 @@ apt install curl
 
 
 dpkg -i zeek_6.2.0-0_amd64.deb
-apt-get install -f
+apt-get install -f -y
 
 echo "export PATH=$PATH:/opt/zeek/bin" >> ~/.bashrc
 source ~/.bashrc
