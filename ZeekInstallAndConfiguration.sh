@@ -78,6 +78,7 @@ cd /opt/zeek/bin
 ./zeekctl check
 ./zeekctl deploy
 
+mkdir /bin/monitoringProccess
 cd -
-cp "DetectionScanningPorts.py" "/opt/zeek/logs"
+cp "DetectionScanningPorts.py" "/bin/monitoringProccess"
 sed -i "s/machineIP=""/machineIP=$IP_server/g" /opt/zeek/logs/DetectionScanningPorts.py
