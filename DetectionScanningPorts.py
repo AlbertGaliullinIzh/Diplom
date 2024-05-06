@@ -1,6 +1,9 @@
 import time
+import requests
+import json
 
-machineIp = [""]
+
+machineIp = []
 json_list= list()
 
 print("Detection scaning ports start...")
@@ -25,8 +28,19 @@ with open('current/conn.log', 'r') as file:
         for ip in unicationIP:
             recordsForIp = [elem for elem in json_list_for_analiz if elem.get("id.orig_h") == ip and (elem.get("conn_state") == "S0" or elem.get("conn_state") == "REJ")]
             if len(recordsForIp) > 10:
-                print(f"Обнаружена подозрительная активность. Предположение: сканирование портов. Адрес: {recordsForIp[0]['id.orig_h']}")
-        
+                try:
+                    print(f"Обнаружена подозрительная активность. Предположение: сканирование портов. Адрес: {recordsForIp[0]['id.orig_h']}")
+                    data = {"name": "VPN", "trigger": "Scanning ports"}#, "IP":str( recordsForIp['id.orig_h'])}
+                    json_data = json.dumps(data)
+                    url = "http://10.0.2.7:5000"
+                    print(data)
+                    response = requests.post(url, data=json_data, headers={"Content-Type": "application/json"})
+                    if response.status_code == 200:
+                        print("Данные успешно отправлены!")
+                    else:
+                        print(f"Ошибка при отправке данных: {response.status_code} - {response.text}")
+                except:
+                    print("Connection error")
         if len(json_list) <= 9:
             pass
         else:
