@@ -8,7 +8,7 @@ json_list= list()
 
 print("Detection scaning ports start...")
 
-with open('current/conn.log', 'r') as file:
+with open('opt/zeek/logs/current/conn.log', 'r') as file:
     current_position = file.tell()
     while True:
         file.seek(current_position)
