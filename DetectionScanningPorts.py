@@ -24,11 +24,18 @@ with open('opt/zeek/logs/current/conn.log', 'r') as file:
 
         json_list_for_analiz = [elem for elem in json_list if elem.get("id.orig_h") != elem.get("id.resp_h") and elem.get("id.orig_h") not in machineIp]
         unicationIP = set([elem["id.orig_h"] for elem in json_list])
-
+    
         for ip in unicationIP:
             recordsForIp = [elem for elem in json_list_for_analiz if elem.get("id.orig_h") == ip and (elem.get("conn_state") == "S0" or elem.get("conn_state") == "REJ")]
             if len(recordsForIp) > 10:
                 try:
+                    
+                    unique_values = set()
+                    for d in recordsForIp:
+                        unique_values.add(d["id.orig_p"])
+                    if len(unique_values < 10):
+                        continue
+                        
                     print(f"Обнаружена подозрительная активность. Предположение: сканирование портов. Адрес: {recordsForIp[0]['id.orig_h']}")
                     data = {"name": "VPN", "trigger": "Scanning ports"}#, "IP":str( recordsForIp['id.orig_h'])}
                     json_data = json.dumps(data)
