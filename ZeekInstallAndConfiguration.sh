@@ -28,13 +28,13 @@ zeek --help
 
 #config files
 file="/opt/zeek/etc/networks.cfg"
-#text1="$IP_monitoring/12       Private IP space"
-#text2="192.168.0.0/16      Private IP space"
+text1="$IP_monitoring/12       Private IP space"
+text2="192.168.0.0/16      Private IP space"
 
 cat /dev/null > "$file"
 
-#echo "$text1" >> "$file"
-#echo "$text2" >> "$file"
+echo "$text1" >> "$file"
+echo "$text2" >> "$file"
 
 file="/opt/zeek/etc/node.cfg"
 
@@ -78,7 +78,7 @@ cd /opt/zeek/bin
 ./zeekctl check
 ./zeekctl deploy
 
-mkdir /bin/monitoringProccess
-cd -
-cp "DetectionScanningPorts.py" "/bin/monitoringProccess"
-sed -i "s/machineIP=""/machineIP=$IP_server/g" /bin/monitoringProccess/DetectionScanningPorts.py
+#mkdir /bin/monitoringProccess
+#cd -
+#cp "DetectionScanningPorts.py" "/bin/monitoringProccess"
+#sed -i "s/machineIP=""/machineIP=$IP_server/g" /bin/monitoringProccess/DetectionScanningPorts.py
