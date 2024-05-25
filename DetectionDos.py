@@ -3,7 +3,7 @@ import time
 import requests
 import json
 
-class MenegerForDosDetection():
+class ManagerForDosDetection():
 
     countIpList = list() # список с количеством Ip
     countRequestList = list() # список с количеством трафика
@@ -116,6 +116,6 @@ class MenegerForDosDetection():
         #         minusCountIpCoef()
         # return
 
-manager = MenegerForDosDetection(8)
+manager = ManagerForDosDetection(8)
 manager.start()
 
