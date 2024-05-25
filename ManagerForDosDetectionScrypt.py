@@ -44,9 +44,11 @@ class ManagerForDosDetection():
                 self.UpploadMachine(elem, [item for item in self.json_list if item["id.orig_h"] == elem])
 
             for elem in self.machineList:
-                #if elem.MachineIsNotActive():
-                #    self.machineList.remove(elem)
-                print(elem.GetIp() + " - " + str(elem.IsMachineAttacking()))
+                if elem.MachineIsNotActive():
+                    self.machineList.remove(elem)
+            for elem in self.machineList:
+                if elem.IsMachineAttacking() > 0.9:
+                    self.sendmessage(elem.GetIp())
             print("----")
             time.sleep(10)
 
