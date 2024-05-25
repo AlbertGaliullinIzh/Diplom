@@ -5,16 +5,16 @@ import json
 
 class ManagerForDosDetection():
 
-    countIpList = list() # список с количеством Ip
-    countRequestList = list() # список с количеством трафика
-    countControversiallList = list() # список с подозрительным трафиком
+    #countIpList = list() # список с количеством Ip
+    #countRequestList = list() # список с количеством трафика
+    #countControversiallList = list() # список с подозрительным трафиком
     countMachineKnown = 10 # Количество машин, которые долдны подключится для киберучений
     
     machineIp = []
 
 
-    countIpCoef = 0
-    countRequestCoef = 0
+    #countIpCoef = 0
+    #countRequestCoef = 0
 
     def __init__(self, numberParticipants):
         self.countMachineKnown = numberParticipants
@@ -24,8 +24,8 @@ class ManagerForDosDetection():
 
         self.itMachineIp = ['192.168.31.116']
 
-    def sendmessage(self, ip): # отправка данных о обнаруженном dos
-        print(f"Обнаружена подозрительная активность. Предположение: Dos-аткака. Адрес: {ip}")
+    def sendmessage(self, ip, assumption):
+        print(f"Обнаружена подозрительная активность. Предположение: {assumption}. Адрес: {ip}")
         data = {"name": "VPN", "trigger": "DOS-attack"}
         json_data = json.dumps(data)
         url = "http://10.0.2.7:5000"
@@ -48,7 +48,10 @@ class ManagerForDosDetection():
                     self.machineList.remove(elem)
             for elem in self.machineList:
                 if elem.IsMachineAttacking() > 0.9:
-                    self.sendmessage(elem.GetIp())
+                    self.sendmessage(elem.GetIp(), "DoS-атака")
+            for elem in self.machineList:
+                if elem.IsMachineScanning():
+                    self.sendmessage(elem.GetIp(), "Сканирование портов")
             print("----")
             time.sleep(10)
 
@@ -62,7 +65,7 @@ class ManagerForDosDetection():
         else:
             self.machineList[index].AddTraffic(input_traffic)
     
-    def GetIdMachineForList(self,ip):# получение id из списка машин
+    def GetIdMachineForList(self,ip):
         i = 0
         for elem in self.machineList:
             if elem.GetIp() == ip:
