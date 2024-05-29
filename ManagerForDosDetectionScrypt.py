@@ -1,4 +1,5 @@
 import DetectionAnomaliesTraffic
+import DetectionScanningPorts
 import time
 import requests
 import json
