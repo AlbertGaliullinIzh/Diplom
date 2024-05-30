@@ -1,17 +1,17 @@
 #!/bin/bash
 
+mkdir /bin/monitoringProcсes
+touch /bin/monitoringProcсes/start_monitoring.sh
 
-cp DetectionAnomaliesTraffic.py /bin/monitoringProcess
-cp ManagerForDosDetectionScrypt.py /bin/monitoringProcess
+cp DetectionAnomaliesTraffic.py /bin/monitoringProcсes
+cp ManagerForDosDetectionScrypt.py /bin/monitoringProcсes
 
-# Создание скрипта на Bash для запуска file1 и file2
-touch /bin/monitoringProcess/start_monitoring.sh
 
-echo "#!/bin/bash" >> /bin/monitoringProcess/start_monitoring.sh
-echo "python3 ManagerForDosDetectionScrypt.py END" >> /bin/monitoringProcess/start_monitoring.sh
+echo "#!/bin/bash" >> /bin/monitoringProcсes/start_monitoring.sh
+echo "python3 ManagerForDosDetectionScrypt.py &" >> /bin/monitoringProcсes/start_monitoring.sh
 
-chmod +x /bin/monitoringProcess/start_monitoring.sh
+chmod +x /bin/monitoringProcсes/start_monitoring.sh
 
-echo "/bin/monitoringProcess/start_monitoring.sh" >> /etc/rc.local
+echo "/bin/monitoringProcсes/start_monitoring.sh" >> /etc/rc.local
 
-/bin/monitoringProcess/start_monitoring.sh
+/bin/monitoringProcсes/start_monitoring.sh
