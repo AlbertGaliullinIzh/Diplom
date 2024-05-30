@@ -1,17 +1,17 @@
 #!/bin/bash
 
-mkdir /bin/monitoringProcсes
-touch /bin/monitoringProcсes/start_monitoring.sh
+mkdir /bin/monitoringProcces
+touch /bin/monitoringProcces/start_monitoring.sh
 
-cp DetectionAnomaliesTraffic.py /bin/monitoringProcсes
-cp ManagerForDetectionScrypt.py /bin/monitoringProcсes
+cp DetectionAnomaliesTraffic.py /bin/monitoringProcces
+cp ManagerForDetectionScrypt.py /bin/monitoringProcces
 
 
-echo "#!/bin/bash" >> /bin/monitoringProcсes/start_monitoring.sh
-echo "python3 ManagerForDetectionScrypt.py &" >> /bin/monitoringProcсes/start_monitoring.sh
+echo "#!/bin/bash" >> /bin/monitoringProcces/start_monitoring.sh
+echo "python3 ManagerForDetectionScrypt.py &" >> /bin/monitoringProcces/start_monitoring.sh
 
-chmod +x /bin/monitoringProcсes/start_monitoring.sh
+chmod +x /bin/monitoringProcces/start_monitoring.sh
 
-echo "/bin/monitoringProcсes/start_monitoring.sh" >> /etc/rc.local
+echo "/bin/monitoringProcces/start_monitoring.sh" >> /etc/rc.local
 
-/bin/monitoringProcсes/start_monitoring.sh
+/bin/monitoringProcces/start_monitoring.sh
