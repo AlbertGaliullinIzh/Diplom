@@ -4,11 +4,11 @@ mkdir /bin/monitoringProcсes
 touch /bin/monitoringProcсes/start_monitoring.sh
 
 cp DetectionAnomaliesTraffic.py /bin/monitoringProcсes
-cp ManagerForDosDetectionScrypt.py /bin/monitoringProcсes
+cp ManagerForDetectionScrypt.py /bin/monitoringProcсes
 
 
 echo "#!/bin/bash" >> /bin/monitoringProcсes/start_monitoring.sh
-echo "python3 ManagerForDosDetectionScrypt.py &" >> /bin/monitoringProcсes/start_monitoring.sh
+echo "python3 ManagerForDetectionScrypt.py &" >> /bin/monitoringProcсes/start_monitoring.sh
 
 chmod +x /bin/monitoringProcсes/start_monitoring.sh
 
