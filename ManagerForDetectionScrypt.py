@@ -63,8 +63,8 @@ class ManagerForDosDetection():
                     machine.Machine(ip, input_traffic, False if len(self.machineList) < self.countMachineKnown else True))
             else:
                 self.machineList[index].AddTraffic(input_traffic)
-         except: 
-                print("error UpploadMachine")
+        except: 
+            print("error UpploadMachine")
     def GetIdMachineForList(self,ip):
         i = 0
         for elem in self.machineList:
