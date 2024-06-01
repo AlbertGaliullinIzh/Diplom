@@ -19,7 +19,6 @@ with open('result.json', 'r') as file:
     while True:
         file.seek(current_position)
         
-        print(file.readlines())
         file.seek(current_position)
         
         json_list = list(json.loads(elem) for elem in file.readlines() if elem != '\n')
