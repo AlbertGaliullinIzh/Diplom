@@ -43,7 +43,7 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
                             json.dump({"name": "server", "trigger": "Uncorrected HASH", "IP": "172.31.2.5"}, f)
                             f.write('\n')
         elif self.path == '/RegularNotification':
-            machineDict[data['name']] = datetime.datetime.now
+            machineDict[data['name']] = datetime.datetime.now()
             
 
         self.send_response(200)
