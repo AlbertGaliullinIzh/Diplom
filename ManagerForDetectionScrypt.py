@@ -44,12 +44,11 @@ class ManagerForDosDetection():
                     if elem.MachineIsNotActive():
                         self.machineList.remove(elem)
                 for elem in self.machineList:
-                    if elem.IsMachineAttacking() > 0.9:
-                        self.sendmessage(elem.GetIp(), "DoS-атака")
-                for elem in self.machineList:
                     if elem.IsMachineScanning():
                         self.sendmessage(elem.GetIp(), "Сканирование портов")
-                print("----")
+                        continue
+                    if elem.IsMachineAttacking() > 0.9:
+                        self.sendmessage(elem.GetIp(), "DoS-атака")
             except: 
                 print("error start")
             time.sleep(10)
