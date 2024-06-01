@@ -15,8 +15,9 @@ def check_connection():
             deltatime_for_machine = now - machineDict[elem]
             
             if deltatime_for_machine.total_seconds() / 60 >= 30:
-                with open('result.json', 'w') as f:
-                            json.dump({elem: "server", "trigger": "not connection", "IP": "-"}, f)
+                with open('result.json', 'a') as f:
+                    json.dump({elem: "server", "trigger": "not connection", "IP": "-"}, f)
+                    f.write('\n')
         time.sleep(1800)
 
 
@@ -29,16 +30,18 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
         data = json.loads(body.decode('utf-8'))
 
         if self.path == '/sendnotificate':
-            with open('result.json', 'w') as f:
+            with open('result.json', 'a') as f:
                 json.dump(data, f)
+                f.write('\n')
         elif self.path == '/EqualsHash':
             with open('hash.json', 'r') as f1:
                 dict1 = json.load(f1)
             for key in dict1:
                 if key in data:
                     if dict1[key] != data[key]:
-                         with open('result.json', 'w') as f:
+                         with open('result.json', 'a') as f:
                             json.dump({"name": "server", "trigger": "Uncorrected HASH", "IP": "172.31.2.5"}, f)
+                            f.write('\n')
         elif self.path == '/RegularNotification':
             machineDict[data['name']] = datetime.datetime.now
             
