@@ -19,8 +19,8 @@ class Machine:
         if len(self.countTraffic) < 10:
             self.countTraffic.append(len(input_traffic))
         else:
-             self.countTraffic.pop(0)
-             self.countTraffic.append(len(input_traffic))
+            self.countTraffic.pop(0)
+            self.countTraffic.append(len(input_traffic))
         self.suspiciousTraffic = self.AnalysForSuspiciousTraffic(input_traffic)
         self.analyzCountTraffic()
         self.lastActiveTime = datetime.datetime.now()
@@ -47,13 +47,13 @@ class Machine:
     def IsMachineScanning(self):
         recordsForIp = [elem for elem in self.traffic if (elem.get("conn_state") == "S0" or elem.get("conn_state") == "REJ")]
         if len(recordsForIp) > 10:                 
-        unique_values = set()
-        for d in recordsForIp:
-            unique_values.add(d["id.orig_p"])
-        if len(unique_values > 10):
-            return true
-        else:
-            return false
+            unique_values = set()
+            for d in recordsForIp:
+                unique_values.add(d["id.orig_p"])
+            if len(unique_values > 10):
+                return true
+            else:
+                return false
     def IsMachineAttacking(self):
         res = self.suspiciousTraffic * 0.5 + self.suspicious * 0.1 + self.suspiciousTrafficCount * 0.4
         if self.suspiciousTraffic * 0.5 + self.suspicious * 0.1 + self.suspiciousTrafficCount * 0.4 > 0.1:
