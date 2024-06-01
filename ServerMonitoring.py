@@ -5,7 +5,7 @@ import datetime
 import threading
 import time
 
-machineDict = {"Vpnsrv": datetime.datetime.now(), "Server": datetime.datetime.now(), "Server-attack": datetime.datetime.now(), "Monitoring": datetime.datetime.now(), "Router": datetime.datetime.now()}
+machineDict = {"vpnsrv": datetime.datetime.now(), "server": datetime.datetime.now(), "server-attack": datetime.datetime.now(), "monitoring": datetime.datetime.now(), "router": datetime.datetime.now()}
 
 def check_connection():
     global machineDict
