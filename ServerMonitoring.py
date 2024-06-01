@@ -2,11 +2,11 @@ import http.server
 import json
 import socketserver
 import datetime
-import asyncio
+import threading
 
 machineDict = {"Vpnsrv": datetime.datetime.now, "Server": datetime.datetime.now, "Server-attack": datetime.datetime.now, "Monitoring": datetime.datetime.now, "Router": datetime.datetime.now}
 
-async def check_time():
+def check_connection():
     global machineDict
     while True:
         now = datetime.datetime.now()
@@ -48,7 +48,8 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
 PORT = 5000
 Handler = RequestHandler
 
-await check_time()
+thread = threading.Thread(target=check_connection)
+thread.start()
 
 with socketserver.TCPServer(("", PORT), Handler) as httpd:
     httpd.serve_forever()
