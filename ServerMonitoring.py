@@ -5,16 +5,16 @@ import datetime
 import threading
 import time
 
-machineDict = {"Vpnsrv": datetime.datetime.now, "Server": datetime.datetime.now, "Server-attack": datetime.datetime.now, "Monitoring": datetime.datetime.now, "Router": datetime.datetime.now}
+machineDict = {"Vpnsrv": datetime.datetime.now(), "Server": datetime.datetime.now(), "Server-attack": datetime.datetime.now(), "Monitoring": datetime.datetime.now(), "Router": datetime.datetime.now()}
 
 def check_connection():
     global machineDict
     while True:
         now = datetime.datetime.now()
         for elem in machineDict.keys:            
-            deltatime_for_machine = now - machineDict['elem']
+            deltatime_for_machine = now - machineDict[elem]
             
-            if (now - deltatime_for_machine).total_seconds() / 60 >= 30:
+            if deltatime_for_machine.total_seconds() / 60 >= 30:
                 with open('result.json', 'w') as f:
                             json.dump({elem: "server", "trigger": "not connection", "IP": "-"}, f)
         time.sleep(1800)
