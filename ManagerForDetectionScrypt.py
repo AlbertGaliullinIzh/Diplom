@@ -24,7 +24,7 @@ class ManagerForDosDetection():
             response = requests.post(url, data=json_data, headers={"Content-Type": "application/json"})
         #except:
           #  print("Error send")
-    def SendRegularNotification(self, ip, assumption):
+    def SendRegularNotification(self):
        # try:
             data = {"name": "VPN"}
             json_data = json.dumps(data)
@@ -35,6 +35,7 @@ class ManagerForDosDetection():
     def start(self):
         while True:
           #  try:
+                self.SendRegularNotification()
                 self.ReadingFile()
                 unicationIP = set([elem["id.orig_h"] for elem in self.json_list if elem['id.orig_h'] not in self.itMachineIp])
                 for elem in unicationIP:
