@@ -5,8 +5,8 @@ class Machine:
         self.ip = ip
         self.countTraffic = [len(traffic)]
         self.lastActiveTime = datetime.datetime.now()
-      
-        self.suspiciousTraffic = self.AnalysForSuspiciousTraffic(traffic)
+        self.traffic = traffic
+        self.suspiciousTraffic = self.AnalysForSuspiciousTraffic()
         self.suspicious = suspicious
         self.suspiciousTrafficCount = 0
 
@@ -21,7 +21,8 @@ class Machine:
         else:
             self.countTraffic.pop(0)
             self.countTraffic.append(len(input_traffic))
-        self.suspiciousTraffic = self.AnalysForSuspiciousTraffic(input_traffic)
+        self.traffic = input_traffic
+        self.suspiciousTraffic = self.AnalysForSuspiciousTraffic()
         self.analyzCountTraffic()
         self.lastActiveTime = datetime.datetime.now()
     def analyzCountTraffic(self): # анализ на количество трафика
@@ -35,15 +36,9 @@ class Machine:
         return
     def MachineIsNotActive(self): # если машина неактивка
         return datetime.datetime.now()-self.lastActiveTime >= datetime.timedelta(minutes=3)
-    def AnalysForSuspiciousTraffic(self,input_traffic):# проверка на подозрительность трафика
-        recordsForIp = [elem for elem in input_traffic if (elem["conn_state"] in ['S0','SHR', 'OTH', 'RSTRH', 'RSTO','REJ'])]
+    def AnalysForSuspiciousTraffic(self):# проверка на подозрительность трафика
+        recordsForIp = [elem for elem in self.traffic if (elem["conn_state"] in ['S0','SHR', 'OTH', 'RSTRH', 'RSTO','REJ'])]
         return len(recordsForIp) / len(input_traffic)
-        # element_count = Counter([elem['conn_state'] for elem in input_traffic])
-        # print(set(sorted([elem['conn_state'] for elem in input_traffic], key=lambda x: (-element_count[x], x))))
-        # print(set([elem['conn_state'] for elem in input_traffic]))
-        # if len(set([elem['conn_state'] for elem in input_traffic])) >2:
-        #     print("")
-        return 0
     def IsMachineScanning(self):
         recordsForIp = [elem for elem in self.traffic if (elem.get("conn_state") == "S0" or elem.get("conn_state") == "REJ")]
         if len(recordsForIp) > 10:                 
