@@ -30,6 +30,6 @@ with open('result.json', 'r') as file:
             file_r_text = file_r.read()
             file_r.seek(0)
             for elem in json_list:
-                file_r_text = file_r_text.replace(f'waiting for a message from the {elem["name"]}...', f'<div class="message"><h4>{elem["trigger"]}</h4><p>{datetime.datetime.now()}</p><p>{elem["IP"]}</p></div>'+f"waiting for a message from the {elem["name"]}..."+f"{'<br>' if len(json_list) != 0 else ""}")
+                file_r_text = file_r_text.replace(f'waiting for a message from the {elem["name"]}...', f'<div class="message"><h4>{elem["trigger"]}</h4><p>{datetime.datetime.now()}</p><p>{elem["IP"]}</p></div>'+f'waiting for a message from the {elem["name"]}...'+f'{"<br>" if len(json_list) != 0 else ""}')
             file_r.write(file_r_text)
         time.sleep(5)
