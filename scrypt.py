@@ -5,25 +5,16 @@ import shutil
 
 print("Starting update index.html")
 
-# Исходный файл
 src_file = 'default-index.html'
-
-# Путь для копии файла
 dst_file = 'index.html'
-
-# Копирование файла
 shutil.copy(src_file, dst_file)
 
 with open('result.json', 'r') as file:
     current_position = file.tell()
     while True:
-        file.seek(current_position)
-        
-        file.seek(current_position)
-        
+        file.seek(current_position)        
         json_list = list(json.loads(elem) for elem in file.readlines() if elem != '\n')
         current_position = file.tell()
-
         file_r_text = ""
         with open('index.html', 'r+') as file_r:
             file_r_text = file_r.read()
