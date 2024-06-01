@@ -60,7 +60,7 @@ class ManagerForDosDetection():
             index = self.GetIdMachineForList(ip)
             if index == -1:            
                 self.machineList.append(
-                    machine.Machine(ip, input_traffic, False if len(self.machineList) < self.countMachineKnown else True))
+                    DetectionAnomaliesTraffic.Machine(ip, input_traffic, False if len(self.machineList) < self.countMachineKnown else True))
             else:
                 self.machineList[index].AddTraffic(input_traffic)
         #except: 
