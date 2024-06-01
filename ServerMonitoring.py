@@ -11,7 +11,7 @@ def check_connection():
     global machineDict
     while True:
         now = datetime.datetime.now()
-        for elem in machine.keys:            
+        for elem in machineDict.keys:            
             deltatime_for_machine = now - machineDict['elem']
             
             if (now - deltatime_for_machine).total_seconds() / 60 >= 30:
