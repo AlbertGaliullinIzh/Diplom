@@ -17,7 +17,7 @@ def check_connection():
             if (now - deltatime_for_machine).total_seconds() / 60 >= 30:
                 with open('result.json', 'w') as f:
                             json.dump({elem: "server", "trigger": "not connection", "IP": "-"}, f)
-            time.sleep(1800)
+        time.sleep(1800)
 
 
 class RequestHandler(http.server.SimpleHTTPRequestHandler):
