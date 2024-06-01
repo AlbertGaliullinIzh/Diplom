@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-16">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MachineStatus</title>
+        <style>
+            body, html{
+                height: 100%;
+                margin: 0;
+            }
+            #container {
+                display: flex;
+                height: 100%;
+                background-color: #1541d1;
+            }
+            .column{
+                margin-top: 15px;
+                width: 20%;
+                border-right: 2px solid #3a5cd5;
+                border-left: 2px solid #3a5cd5;
+                height: 95%;
+                overflow-y: auto;
+                text-align: center;
+            }
+            .message{
+                margin: 5%;
+                background-color: #3a5cd5;
+                border: 2px solid #1c3073;
+                box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.5);
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <div class="column">
+                <h3>Vpnsrv</h3>
+                <div class="message"><h4>что-то</h4><p>2024-05-06 15:15:36.394583</p><p>sfref</p></div><div class="message"><h4>что-то</h4><p>2024-05-06 15:15:36.394583</p><p>sfref</p></div><div class="message"><h4>что-то</h4><p>2024-05-06 15:16:01.441631</p><p>sfref</p></div>waiting for a message from the vpnsrv...<br><br><br>                
+            </div>
+            <div class="column">
+                <h3>Server</h3>
+                waiting for a message from the server ...
+            </div>
+            <div class="column">
+                <h3>Server-attack</h3>
+                <div class="message"><h4>что-то</h4><p>2024-05-06 15:15:36.394583</p><p>sfref</p></div><div class="message"><h4>что-то2</h4><p>2024-05-06 15:15:36.394583</p><p>sfref</p></div><div class="message"><h4>что-то</h4><p>2024-05-06 15:15:36.394583</p><p>sfref</p></div><div class="message"><h4>что-то</h4><p>2024-05-06 15:15:36.394583</p><p>sfref</p></div><div class="message"><h4>что-то</h4><p>2024-05-06 15:15:36.394583</p><p>sfref</p></div><div class="message"><h4>что-то</h4><p>2024-05-06 15:15:36.394583</p><p>sfref</p></div><div class="message"><h4>что-то</h4><p>2024-05-06 15:15:36.394583</p><p>sfref</p></div>waiting for a message from the server-attack...<br><br><br><br><br><br><br>
+            </div>
+            <div class="column">
+                <h3>Monitoring</h3>
+                waiting for a message from the monitoring...
+            </div>
+            <div class="column">
+                <h3>Router</h3>
+                waiting for a message from the router...
+            </div>
+        </div>
+        <script> 
+            setInterval(function() { location.reload();}, 5000);
+        </script>
+    </body>
+</html>
