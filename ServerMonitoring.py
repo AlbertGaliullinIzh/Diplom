@@ -3,6 +3,7 @@ import json
 import socketserver
 import datetime
 import threading
+import time
 
 machineDict = {"Vpnsrv": datetime.datetime.now, "Server": datetime.datetime.now, "Server-attack": datetime.datetime.now, "Monitoring": datetime.datetime.now, "Router": datetime.datetime.now}
 
@@ -16,7 +17,7 @@ def check_connection():
             if (now - deltatime_for_machine).total_seconds() / 60 >= 30:
                 with open('result.json', 'w') as f:
                             json.dump({elem: "server", "trigger": "not connection", "IP": "-"}, f)
-            await asyncio.sleep(1800)
+            time.sleep(1800)
 
 
 class RequestHandler(http.server.SimpleHTTPRequestHandler):
