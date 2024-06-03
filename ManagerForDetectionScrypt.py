@@ -6,66 +6,65 @@ import json
 class ManagerForDosDetection():
 
     countMachineKnown = 10
-    machineIp = []
+    machineIp = ['192.168.31.144']
 
     def __init__(self, numberParticipants):
         self.countMachineKnown = numberParticipants
         self.machineList = list()
         self.json_list = list()
         self.current_position = 0
-
-        self.itMachineIp = ['192.168.31.116']
+        self.itMachineIp = ['192.168.31.144']
 
     def sendmessage(self, ip, assumption):
-        #try:
-            data = {"name": "VPN", "trigger": "DOS-attack"}
+        try:
+            data = {"name": "vpnsrv", "trigger": assumption, "IP":f"{ip}"}
             json_data = json.dumps(data)
-            url = "http://10.0.2.7:5000/sendnotificate"
+            url = "http://192.168.31.244:5000/sendnotificate"
             response = requests.post(url, data=json_data, headers={"Content-Type": "application/json"})
-        #except:
-          #  print("Error send")
+        except:
+            print("Error send")
     def SendRegularNotification(self):
-       # try:
-            data = {"name": "VPN"}
+        try:
+            data = {"name": "vpnsrv"}
             json_data = json.dumps(data)
-            url = "http://10.0.2.7:5000/RegularNotification"
+            url = "http://192.168.31.244:5000/RegularNotification"
             response = requests.post(url, data=json_data, headers={"Content-Type": "application/json"})
-       # except:
-         #   print("Error send")
+        except:
+            print("Error send")
     def start(self):
         while True:
-          #  try:
+            try:
                 self.SendRegularNotification()
                 self.ReadingFile()
                 unicationIP = set([elem["id.orig_h"] for elem in self.json_list if elem['id.orig_h'] not in self.itMachineIp])
                 for elem in unicationIP:
-                    self.UpploadMachine(elem, [item for item in self.json_list if item["id.orig_h"] == elem])
-    
+                    self.UpploadMachine(elem, [item for item in self.json_list if item["id.orig_h"] == elem])    
                 for elem in self.machineList:
                     if elem.MachineIsNotActive():
                         self.machineList.remove(elem)
                 for elem in self.machineList:
-                    if elem.IsMachineScanning():
+                    if elem.IsMachineScanning() == True:
                         self.sendmessage(elem.GetIp(), "Сканирование портов")
                         continue
-                    if elem.IsMachineAttacking() > 0.9:
+                    print(elem.IsMachineAttacking())
+                    if elem.IsMachineAttacking() >= 0.8:
                         self.sendmessage(elem.GetIp(), "DoS-атака")
-           # except: 
-              #  print("error start")
-                time.sleep(10)
+            except: 
+                print("error start")
+            time.sleep(20)
 
 
 
     def UpploadMachine(self, ip, input_traffic):
-        #try:
+        try:
             index = self.GetIdMachineForList(ip)
             if index == -1:            
                 self.machineList.append(
                     DetectionAnomaliesTraffic.Machine(ip, input_traffic, False if len(self.machineList) < self.countMachineKnown else True))
             else:
                 self.machineList[index].AddTraffic(input_traffic)
-        #except: 
-         #   print("error UpploadMachine")
+        except: 
+            print("error UpploadMachine")
     def GetIdMachineForList(self,ip):
         i = 0
         for elem in self.machineList:
@@ -75,7 +74,7 @@ class ManagerForDosDetection():
         return -1
     
     def ReadingFile(self):# считывание с файла, с ранее указаной позиции
-       # try:
+        try:
             with open('/opt/zeek/logs/current/conn.log', 'r') as file:
                 file.seek(self.current_position)
                 self.json_list = file.readlines()
@@ -84,8 +83,8 @@ class ManagerForDosDetection():
                 while i < len(self.json_list):
                     self.json_list[i] = eval(self.json_list[i].replace("true","True").replace("false","False"))
                     i+=1
-      #  except:
-        #    print("error ReadingFile")
+        except:
+            print("error ReadingFile")
 
 
 manager = ManagerForDosDetection(8)
