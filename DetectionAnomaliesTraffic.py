@@ -25,15 +25,28 @@ class Machine:
         self.suspiciousTraffic = self.AnalysForSuspiciousTraffic()
         self.analyzCountTraffic()
         self.lastActiveTime = datetime.datetime.now()
-    def analyzCountTraffic(self): # анализ на количество трафика
+    # def analyzCountTraffic(self): # анализ на количество трафика
+    #     i = 0
+    #     flowGrowth = list()
+    #     while i!=len(self.countTraffic)-1:
+    #         flowGrowth.append(self.countTraffic[i+1]/self.countTraffic[i])
+    #         i+=1
+    #     grad = (sum(flowGrowth)/len(flowGrowth))/max(flowGrowth)
+    #     self.suspiciousTrafficCount = grad if grad >=0 else 0
+    #     return
+    def analyzCountTraffic(self):
+        c = 0
         i = 0
-        flowGrowth = list()
-        while i!=len(self.countTraffic)-1:
-            flowGrowth.append(self.countTraffic[i+1]/self.countTraffic[i])
-            i+=1
-        grad = (sum(flowGrowth)/len(flowGrowth))/max(flowGrowth)
-        self.suspiciousTrafficCount = grad if grad >=0 else 0
-        return
+        t = 0
+        while i < len(self.countTraffic)-2:
+            i += 1
+            if self.countTraffic[i-1] < self.countTraffic[i] and self.countTraffic[i] < self.countTraffic[i+1]:
+                c += self.countTraffic[i]/self.countTraffic[i-1] - 1
+                t+=1
+            if self.countTraffic[i-1] < self.countTraffic[i] and self.countTraffic[i] > self.countTraffic[i+1] and self.countTraffic[i]/self.countTraffic[i-1] > self.countTraffic[i+1]/self.countTraffic[i]:
+                c += self.countTraffic[i]/self.countTraffic[i-1] - 1
+                t +=1
+        return c/t
     def MachineIsNotActive(self): # если машина неактивка
         return datetime.datetime.now()-self.lastActiveTime >= datetime.timedelta(minutes=3)
     def AnalysForSuspiciousTraffic(self):# проверка на подозрительность трафика
