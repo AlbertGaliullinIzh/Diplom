@@ -9,8 +9,6 @@ class Machine:
         self.suspiciousTraffic = self.AnalysForSuspiciousTraffic()
         self.suspicious = suspicious
         self.suspiciousTrafficCount = 0
-
-
     def GetIp(self):
         return self.ip
     def GetTraffic(self):
@@ -25,19 +23,11 @@ class Machine:
         self.suspiciousTraffic = self.AnalysForSuspiciousTraffic()
         self.analyzCountTraffic()
         self.lastActiveTime = datetime.datetime.now()
-    # def analyzCountTraffic(self): # анализ на количество трафика
-    #     i = 0
-    #     flowGrowth = list()
-    #     while i!=len(self.countTraffic)-1:
-    #         flowGrowth.append(self.countTraffic[i+1]/self.countTraffic[i])
-    #         i+=1
-    #     grad = (sum(flowGrowth)/len(flowGrowth))/max(flowGrowth)
-    #     self.suspiciousTrafficCount = grad if grad >=0 else 0
-    #     return
     def analyzCountTraffic(self):
         c = 0
         i = 0
         t = 0
+        print(self.GetIp(), self.countTraffic)
         while i < len(self.countTraffic)-2:
             i += 1
             if self.countTraffic[i-1] < self.countTraffic[i] and self.countTraffic[i] < self.countTraffic[i+1]:
@@ -46,7 +36,10 @@ class Machine:
             if self.countTraffic[i-1] < self.countTraffic[i] and self.countTraffic[i] > self.countTraffic[i+1] and self.countTraffic[i]/self.countTraffic[i-1] > self.countTraffic[i+1]/self.countTraffic[i]:
                 c += self.countTraffic[i]/self.countTraffic[i-1] - 1
                 t +=1
-        return c/t
+        if t == 0:
+            self.suspiciousTrafficCount = 0
+            return
+        self.suspiciousTrafficCount = c/t if c/t < 1 else 1
     def MachineIsNotActive(self): # если машина неактивка
         return datetime.datetime.now()-self.lastActiveTime >= datetime.timedelta(minutes=3)
     def AnalysForSuspiciousTraffic(self):# проверка на подозрительность трафика
@@ -54,20 +47,16 @@ class Machine:
         return len(recordsForIp) / len(self.traffic)
     def IsMachineScanning(self):
         recordsForIp = [elem for elem in self.traffic if (elem.get("conn_state") == "S0" or elem.get("conn_state") == "REJ")]
-        if len(recordsForIp) > 10:                 
+        if len(recordsForIp) > 10:
             unique_values = set()
             for d in recordsForIp:
-                unique_values.add(d["id.orig_p"])
+                unique_values.add(d["id.resp_p"])
             if len(unique_values) > 10:
                 return True
             else:
                 return False
     def IsMachineAttacking(self):
         res = self.suspiciousTraffic * 0.5 + self.suspicious * 0.1 + self.suspiciousTrafficCount * 0.4
-        if self.suspiciousTraffic * 0.5 + self.suspicious * 0.1 + self.suspiciousTrafficCount * 0.4 > 0.1:
-            print(f"IP - {self.GetIp()} --- {self.suspiciousTraffic * 0.5 + self.suspicious * 0.1 + self.suspiciousTrafficCount * 0.4}")
-            print(f"self.suspiciousTraffic - {self.suspiciousTraffic}    self.suspicious - {self.suspicious}     self.suspiciousTrafficCount - {self.suspiciousTrafficCount}")
-            print("___")
         self.suspiciousTraffic = 0
         self.suspicious = 0
         self.suspiciousTrafficCount = 0
