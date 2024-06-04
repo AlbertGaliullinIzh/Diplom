@@ -15,7 +15,7 @@ class ManagerForDosDetection():
         self.current_position = 0
         self.itMachineIp = ['192.168.31.144']
 
-    def sendmessage(self, ip, assumption):
+    def Sendmessage(self, ip, assumption):
         try:
             data = {"name": "vpnsrv", "trigger": assumption, "IP":f"{ip}"}
             json_data = json.dumps(data)
@@ -44,11 +44,11 @@ class ManagerForDosDetection():
                         self.machineList.remove(elem)
                 for elem in self.machineList:
                     if elem.IsMachineScanning() == True:
-                        self.sendmessage(elem.GetIp(), "Сканирование портов")
+                        self.Sendmessage(elem.GetIp(), "Сканирование портов")
                         continue
                     print(elem.IsMachineAttacking())
                     if elem.IsMachineAttacking() >= 0.8:
-                        self.sendmessage(elem.GetIp(), "DoS-атака")
+                        self.Sendmessage(elem.GetIp(), "DoS-атака")
             except: 
                 print("error start")
             time.sleep(20)
