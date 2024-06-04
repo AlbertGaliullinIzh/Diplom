@@ -73,7 +73,7 @@ class ManagerForDosDetection():
             i+=1
         return -1
     
-    def ReadingFile(self):# считывание с файла, с ранее указаной позиции
+    def ReadingFile(self):
         try:
             with open('/opt/zeek/logs/current/conn.log', 'r') as file:
                 file.seek(self.current_position)
