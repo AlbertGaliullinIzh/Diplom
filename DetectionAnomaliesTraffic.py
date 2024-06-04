@@ -15,7 +15,7 @@ class Machine:
         return self.traffic
     def MachineIsNotActive(self):
         return datetime.datetime.now()-self.lastActiveTime >= datetime.timedelta(minutes=3)
-    def AddTraffic(self, input_traffic): # Добавляяем трафик
+    def AddTraffic(self, input_traffic):
         if len(self.countTraffic) < 10:
             self.countTraffic.append(len(input_traffic))
         else:
