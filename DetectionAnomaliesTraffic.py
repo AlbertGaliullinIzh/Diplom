@@ -13,6 +13,8 @@ class Machine:
         return self.ip
     def GetTraffic(self):
         return self.traffic
+    def MachineIsNotActive(self):
+        return datetime.datetime.now()-self.lastActiveTime >= datetime.timedelta(minutes=3)
     def AddTraffic(self, input_traffic): # Добавляяем трафик
         if len(self.countTraffic) < 10:
             self.countTraffic.append(len(input_traffic))
@@ -40,8 +42,6 @@ class Machine:
             self.suspiciousTrafficCount = 0
             return
         self.suspiciousTrafficCount = c/t if c/t < 1 else 1
-    def MachineIsNotActive(self): # если машина неактивка
-        return datetime.datetime.now()-self.lastActiveTime >= datetime.timedelta(minutes=3)
     def AnalysForSuspiciousTraffic(self):# проверка на подозрительность трафика
         recordsForIp = [elem for elem in self.traffic if (elem["conn_state"] in ['S0','SHR', 'OTH', 'RSTRH', 'RSTO','REJ'])]
         return len(recordsForIp) / len(self.traffic)
