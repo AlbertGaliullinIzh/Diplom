@@ -86,6 +86,6 @@ class ManagerForDosDetection():
             print("error ReadingFile")
 
 
-manager = ManagerForDosDetection(8)
+manager = ManagerForDosDetection(Количество машин)
 manager.start()
 
