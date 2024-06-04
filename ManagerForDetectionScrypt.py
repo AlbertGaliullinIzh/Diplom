@@ -19,7 +19,7 @@ class ManagerForDosDetection():
         try:
             data = {"name": "vpnsrv", "trigger": assumption, "IP":f"{ip}"}
             json_data = json.dumps(data)
-            url = "http://192.168.31.244:5000/sendnotificate"
+            url = "http://IP:5000/sendnotificate"
             response = requests.post(url, data=json_data, headers={"Content-Type": "application/json"})
         except:
             print("Error send")
