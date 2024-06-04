@@ -46,7 +46,6 @@ class ManagerForDosDetection():
                     if elem.IsMachineScanning() == True:
                         self.Sendmessage(elem.GetIp(), "Сканирование портов")
                         continue
-                    print(elem.IsMachineAttacking())
                     if elem.IsMachineAttacking() >= 0.8:
                         self.Sendmessage(elem.GetIp(), "DoS-атака")
             except: 
