@@ -42,7 +42,7 @@ class Machine:
             self.suspiciousTrafficCount = 0
             return
         self.suspiciousTrafficCount = c/t if c/t < 1 else 1
-    def AnalysForSuspiciousTraffic(self):# проверка на подозрительность трафика
+    def AnalysForSuspiciousTraffic(self):
         recordsForIp = [elem for elem in self.traffic if (elem["conn_state"] in ['S0','SHR', 'OTH', 'RSTRH', 'RSTO','REJ'])]
         return len(recordsForIp) / len(self.traffic)
     def IsMachineScanning(self):
