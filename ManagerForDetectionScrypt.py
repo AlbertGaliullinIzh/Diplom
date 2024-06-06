@@ -14,6 +14,7 @@ class ManagerForDosDetection():
         self.json_list = list()
         self.current_position = 0
         self.itMachineIp = ['192.168.31.144']
+        self.lastCountUnicationIp = 0
 
     def Sendmessage(self, ip, assumption):
         try:
