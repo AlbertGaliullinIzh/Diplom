@@ -48,6 +48,9 @@ class ManagerForDosDetection():
                         continue
                     if elem.IsMachineAttacking() >= 0.8:
                         self.Sendmessage(elem.GetIp(), "DoS-атака")
+                if len(unicationIP) > self.lastCountUnicationIp*2 and len(unicationIP) > self.countMachineKnown :
+                    self.Sendmessage("-", "Резкое увеличение количества подключений. Возможно, DoS-атака")
+                self.lastCountUnicationIp = len(unicationIP)
             except: 
                 print("error start")
             time.sleep(20)
