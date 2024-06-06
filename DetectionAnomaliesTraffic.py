@@ -29,7 +29,6 @@ class Machine:
         c = 0
         i = 0
         t = 0
-        print(self.GetIp(), self.countTraffic)
         while i < len(self.countTraffic)-2:
             i += 1
             if self.countTraffic[i-1] < self.countTraffic[i] and self.countTraffic[i] < self.countTraffic[i+1]:
