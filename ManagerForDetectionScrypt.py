@@ -5,9 +5,6 @@ import json
 
 class ManagerForDosDetection():
 
-    countMachineKnown = 10
-    machineIp = ['192.168.31.144']
-
     def __init__(self, numberParticipants):
         self.countMachineKnown = numberParticipants
         self.machineList = list()
