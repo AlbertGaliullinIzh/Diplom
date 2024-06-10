@@ -57,6 +57,5 @@ class Machine:
     def IsMachineAttacking(self):
         res = self.suspiciousTraffic * 0.5 + self.suspicious * 0.1 + self.suspiciousTrafficCount * 0.4
         self.suspiciousTraffic = 0
-        self.suspicious = 0
         self.suspiciousTrafficCount = 0
         return res
