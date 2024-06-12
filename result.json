@@ -1,10 +1,2 @@
-{"name":"vpnsrv", "trigger" : "что-то", "IP": "sfref"}
-{"name":"vpnsrv", "trigger" : "что-то", "IP": "sfref"}
-{"name":"server-attack", "trigger" : "что-то", "IP": "sfref"}
-{"name":"server-attack", "trigger" : "что-то2", "IP": "sfref"}
-{"name":"server-attack", "trigger" : "что-то", "IP": "sfref"}
-{"name":"server-attack", "trigger" : "что-то", "IP": "sfref"}
-{"name":"server-attack", "trigger" : "что-то", "IP": "sfref"}
-{"name":"server-attack", "trigger" : "что-то", "IP": "sfref"}
-{"name":"server-attack", "trigger" : "что-то", "IP": "sfref"}
-{"name":"vpnsrv", "trigger" : "что-то", "IP": "sfref"}
+{"name":"vpnsrv", "trigger" : "тест", "IP": "-"}
+{"name":"vpnsrv", "trigger" : "тест", "IP": "-"}
